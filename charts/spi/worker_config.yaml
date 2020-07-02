@@ -1,0 +1,4 @@
+streaming_platform:
+  {{- toYaml .Values.streaming_platform | nindent 4 }}
+tasks:
+  {{- toYaml .Values.tasks | nindent 2 }}

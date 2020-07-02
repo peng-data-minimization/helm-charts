@@ -1,0 +1,80 @@
+{{- $fullName := include "spi.fullname" . -}}
+{{- $labels := include "spi.labels" . -}}
+{{- $selectorLabels := include "spi.selectorLabels" . -}}
+{{- $serviceAccountName := include "spi.serviceAccountName" . -}}
+
+{{- range .Values.tasks }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-%s" $fullName .name }}
+  labels:
+    {{- $labels | nindent 4 }}
+spec:
+{{- if not $.Values.autoscaling.enabled }}
+  replicas: {{ $.Values.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- $selectorLabels | nindent 6 }}
+  template:
+    metadata:
+    {{- with $.Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- $selectorLabels | nindent 8 }}
+    spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ $serviceAccountName }}
+      securityContext:
+        {{- toYaml $.Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ $.Chart.Name }}
+          securityContext:
+            {{- toYaml $.Values.securityContext | nindent 12 }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          env:
+            - name: DESIGNATED_TASK
+              value: {{ .name }}
+          volumeMounts:
+            - name: worker-config
+              mountPath: /etc/config
+          command: [ "python", "./run.py", "--config-path", "/etc/config/worker_config.yaml", "--designated-task", "$(DESIGNATED_TASK)" ]
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+      volumes:
+        - name: worker-config
+          configMap:
+            name: worker-config
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
