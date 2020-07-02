@@ -1,0 +1,17 @@
+name: Ship-it
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    - name: Release Helm Chart
+      uses: helm/chart-releaser-action@v1.0.0-rc.2
+      with:
+        # The charts directory
+        charts_dir: charts/spi
