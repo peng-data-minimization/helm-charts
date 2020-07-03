@@ -36,9 +36,7 @@ jobs:
       working-directory: helm-docs/cmd/helm-docs
       env:
         GOPROXY: "https://proxy.golang.org"
-      run: |
-        go build
-        echo "::add-path::$(pwd)"    
+      run: go build   
 
     - name: Generate README docs for helm values
       working-directory: helm-charts
