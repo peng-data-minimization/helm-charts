@@ -1,3 +1,31 @@
+spi:
+  streaming_platform:
+    type: kafka
+    #broker_url: {{ .Release.Name }}-cp-kafka-headless:9092
+    broker_url: dm-pipeline-cp-kafka-headless:9092
+    auth:
+    - user: ~
+    - pw: ~
+
+  task_defaults:
+    input_offset_reset: earliest
+    topic_encoding: "utf8"
+    storage_mode: "memory"
+    input_data_type: "json"
+
+  tasks: []
+  # - name: first
+  #   input_topic: "foo"
+  #   output_topic: "bar"
+  #   function:
+  #     name: "reduce_to_mean"
+  #     args:
+  #       keys: ['a']
+  #     window:
+  #       type: length
+  #       value: 5
+  #       grouping_keys: ['b']
+
 elasticsearch:
   cluster:
     additionalJavaOpts: "-Xmx128m -Xms128m"
@@ -63,7 +91,8 @@ elasticsink:
       krb5Conf: |-
 
     bootstrapServers:
-      - name: confluent-platform-cp-kafka-headless
+      # - name: {{ .Release.Name }}-cp-kafka-headless
+      - name: dm-pipeline-cp-kafka-headless
         port: 9092
         sslPort: 9093
         saslSslPort: 9094
@@ -72,7 +101,8 @@ elasticsink:
   schemaRegistries:
     enabled: true
     hosts:
-      - host: confluent-platform-cp-schema-registry
+      # - host: {{ .Release.Name }}-cp-schema-registry
+      - host: dm-pipeline-cp-schema-registry
         protocol: http
         port: 8081
         jmxPort: 9102
@@ -142,7 +172,8 @@ elasticsink:
     "xpack.security.enabled=false"
 
   # url Url including port for Elastic Search cluster node. type: STRING importance: HIGH
-  url: elasticsearch-discovery:9300
+  # url: {{ .Release.Name }}-elasticsearch-discovery:9300
+  url: dm-pipeline-elasticsearch-discovery:9300
 
   # maxRetries The maximum number of times to try the write again. type: INT importance: MEDIUM
   maxRetries: 20
@@ -165,7 +196,8 @@ elasticsink:
 
 kibana:
   env:
-    ELASTICSEARCH_HOSTS: http://elasticsearch-client:9200
+    # ELASTICSEARCH_HOSTS: http://{{ .Release.Name }}-elasticsearch-client:9200
+    ELASTICSEARCH_HOSTS: http://dm-pipeline-elasticsearch-client:9200
 
 confluent-platform:
   ## ------------------------------------------------------
