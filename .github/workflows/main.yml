@@ -18,32 +18,31 @@ jobs:
   generate-docs:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: helm-charts
+    - name: Checkout helm-docs builder
+      uses: actions/checkout@master
+      with:
+        repository: norwoodj/helm-docs
+        path: helm-docs
+        
     - name: Setup Go
       uses: actions/setup-go@v2
       with:
         go-version: 1.13
-    - name: Get helm-docs builder
-      uses: actions/checkout@master
-      with:
-        repository: norwoodj/helm-docs
-        token: "${{ secrets.CR_TOKEN }}"
-        path: helm-docs
     - name: Build helm-docs builder
-      working-directory: helm-docs
+      working-directory: helm-docs/cmd/helm-docs
       env:
         GOPROXY: "https://proxy.golang.org"
       run: |
-        cd cmd/helm-docs
         go build
-        echo "::add-path::$(pwd)"
-
-    - uses: actions/checkout@v2
-      with:
-        path: helm-charts
+        echo "::add-path::$(pwd)"    
 
     - name: Generate README docs for helm values
       working-directory: helm-charts
-      run: ../helm-docs/helm-docs
+      run: $GITHUB_WORKSPACE/helm-docs/cmd/helm-docs/helm-docs
     - name: Create PR
       uses: peter-evans/create-pull-request@v2
       with:
