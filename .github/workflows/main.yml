@@ -46,7 +46,7 @@ jobs:
     - name: Create PR
       uses: peter-evans/create-pull-request@v2
       with:
-        token: "${{ secrets.CR_TOKEN }}"
-        commit-message: Update helm values documentation
+        title: Update helm values documentation
+        commit-message: Generated for ${{ github.ref }}
         branch: update-helm-vulues-docs
         path: helm-charts
