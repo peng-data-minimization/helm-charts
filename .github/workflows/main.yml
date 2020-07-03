@@ -14,7 +14,8 @@ jobs:
         # Fetch entire history. Required for chart-releaser; see https://github.com/helm/chart-releaser-action/issues/13#issuecomment-602063896
         fetch-depth: 0
     - name: Release Helm Chart
-      uses: helm/chart-releaser-action@v1.0.0-rc.2
+      # we depend on https://github.com/helm/chart-releaser-action/issues/12, which is not yet released
+      uses: helm/chart-releaser-action@master
       with:
         charts_dir: .
       env:
