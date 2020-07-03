@@ -2,7 +2,7 @@ name: Ship-it
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop ]
 
 jobs:
   release:
@@ -14,3 +14,37 @@ jobs:
       uses: helm/chart-releaser-action@v1.0.0-rc.2
       env:
         CR_TOKEN: "${{ secrets.CR_TOKEN }}"
+
+  generate-docs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: helm-charts
+    - name: Checkout helm-docs builder
+      uses: actions/checkout@master
+      with:
+        repository: norwoodj/helm-docs
+        path: helm-docs
+        
+    - name: Setup Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.13
+    - name: Build helm-docs builder
+      working-directory: helm-docs/cmd/helm-docs
+      env:
+        GOPROXY: "https://proxy.golang.org"
+      run: go build   
+
+    - name: Generate README docs for helm values
+      working-directory: helm-charts
+      run: ../helm-docs/cmd/helm-docs/helm-docs
+    - name: Create PR
+      uses: peter-evans/create-pull-request@v2
+      with:
+        title: Update helm values documentation
+        commit-message: Generated for ${{ github.ref }}
+        branch: update-helm-vulues-docs
+        path: helm-charts
