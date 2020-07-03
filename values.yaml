@@ -198,6 +198,8 @@ kibana:
   env:
     # ELASTICSEARCH_HOSTS: http://{{ .Release.Name }}-elasticsearch-client:9200
     ELASTICSEARCH_HOSTS: http://dm-pipeline-elasticsearch-client:9200
+  image:
+    tag: 6.8.0
 
 confluent-platform:
   ## ------------------------------------------------------
