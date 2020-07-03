@@ -1,8 +1,9 @@
-# spi
+spi
+===
 
 A Helm chart for the data minimization streaming platform interface
 
-## Values
+## Chart Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|

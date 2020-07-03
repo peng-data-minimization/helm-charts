@@ -1,0 +1,5 @@
+apiVersion: v2
+appVersion: 1.16.0
+version: 0.0.1
+name: data-minimization-pipeline
+description: A Helm chart for a data minimization pipeline based on Confluent Kafka, Elastic and Prometheus

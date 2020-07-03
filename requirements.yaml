@@ -1,0 +1,26 @@
+dependencies:
+- name: spi
+  version: 0.1.3
+  repository: file://./subcharts/spi # workaround for https://github.com/helm/helm/issues/3742#issuecomment-383095917
+- name: cp-helm-charts
+  version: 0.5.0
+  repository: https://confluentinc.github.io/cp-helm-charts/
+  alias: confluent-platform
+- name: kibana
+  version: 3.2.6
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  condition: kibana.enabled
+- name: elasticsearch
+  version: 1.32.2
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  condition: elasticsearch.enabled
+- name: kafka-connect-elastic6-sink
+  version: 1.9
+  repository: https://lensesio.github.io/kafka-helm-charts
+  alias: elasticsink
+  condition: elasticsearch.enabled
+- name: prometheus-operator
+  version: 8.15.6
+  repository: https://kubernetes-charts.storage.googleapis.com
+  alias: monitoring
+  condition: monitoring.enabled

@@ -1,0 +1,21 @@
+dependencies:
+- name: spi
+  repository: file://./subcharts/spi
+  version: 0.1.3
+- name: cp-helm-charts
+  repository: https://confluentinc.github.io/cp-helm-charts/
+  version: 0.5.0
+- name: kibana
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 3.2.6
+- name: elasticsearch
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 1.32.2
+- name: kafka-connect-elastic6-sink
+  repository: https://lensesio.github.io/kafka-helm-charts
+  version: "1.9"
+- name: prometheus-operator
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 8.15.6
+digest: sha256:fd763ab9623030cf0cba01eb9dd76e3b3e1c31aad0f657c37d5751ff780afff5
+generated: "2020-07-03T12:52:25.241617+02:00"
