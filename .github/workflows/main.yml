@@ -42,7 +42,7 @@ jobs:
 
     - name: Generate README docs for helm values
       working-directory: helm-charts
-      run: helm-docs/cmd/helm-docs/helm-docs
+      run: ../helm-docs/cmd/helm-docs/helm-docs
     - name: Create PR
       uses: peter-evans/create-pull-request@v2
       with:
