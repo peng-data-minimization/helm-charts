@@ -27,16 +27,23 @@ jobs:
       with:
         repository: norwoodj/helm-docs
         token: "${{ secrets.CR_TOKEN }}"
+        path: helm-docs
     - name: Build helm-docs builder
+      working-directory: helm-docs
       env:
         GOPROXY: "https://proxy.golang.org"
       run: |
         cd cmd/helm-docs
         go build
         echo "::add-path::$(pwd)"
+
     - uses: actions/checkout@v2
+      with:
+        path: helm-charts
+
     - name: Generate README docs for helm values
-      run: helm-docs
+      working-directory: helm-charts
+      run: ../helm-docs/helm-docs
     - name: Create PR
       uses: peter-evans/create-pull-request@v2
       with:
