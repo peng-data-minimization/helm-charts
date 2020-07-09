@@ -253,7 +253,7 @@ confluent-platform:
     persistence:
       enabled: true
       # storageClass: ""
-      size: 5Gi
+      size: 20Gi
       disksPerBroker: 1
     resources: {}
     ## If you do want to specify resources, uncomment the following lines, adjust them as necessary,
