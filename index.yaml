@@ -3,12 +3,12 @@ entries:
   spi:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-07-09T20:03:12.263139+02:00"
+    created: "2020-07-09T20:08:48.550686+02:00"
     description: A Helm chart for the data minimization streaming platform interface
     digest: 8487df2ddca35b1c255545a1ebf9a3fde19ab1f7565665ad588cf9aa3887d7c6
     name: spi
     type: application
     urls:
-    - https://github.com/peng-data-minimization/dm-spi/releases/download/spi-0.1.3/spi-0.1.3.tgz
+    - https://github.com/peng-data-minimization/helm-charts/releases/download/spi-0.1.3/spi-0.1.3.tgz
     version: 0.1.3
-generated: "2020-07-09T20:03:11.912299+02:00"
+generated: "2020-07-09T20:08:48.239992+02:00"
