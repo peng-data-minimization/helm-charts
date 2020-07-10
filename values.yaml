@@ -255,6 +255,24 @@ confluent-platform:
       # storageClass: ""
       size: 20Gi
       disksPerBroker: 1
+    configurationOverrides:
+      "offsets.topic.replication.factor": "3"
+      "auto.create.topics.enable": true
+      ## Options required for external access via NodePort
+      ## ref:
+      ## - http://kafka.apache.org/documentation/#security_configbroker
+      ## - https://cwiki.apache.org/confluence/display/KAFKA/KIP-103%3A+Separation+of+Internal+and+External+traffic
+      ##
+      ## Advertised listeners will use the firstListenerPort value as it's default unless overridden here.
+      ## Setting "advertised.listeners" here appends to "PLAINTEXT://${POD_IP}:9092,"
+      "advertised.listeners": |-
+        EXTERNAL://${HOST_IP}:$((31090 + ${KAFKA_BROKER_ID}))
+      "listener.security.protocol.map": |-
+        PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+    nodeport:
+      enabled: true
+      servicePort: 19092
+      firstListenerPort: 31090
     resources: {}
     ## If you do want to specify resources, uncomment the following lines, adjust them as necessary,
     ## and remove the curly braces after 'resources:'
