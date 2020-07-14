@@ -7,7 +7,7 @@ replicaCount: 1
 
 image:
   repository: tubpeng/kafka-data-minimization-spi
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
 
