@@ -47,18 +47,6 @@ spec:
             - name: worker-config
               mountPath: /etc/config
           command: [ "python", "./run.py", "--config-path", "/etc/config/worker_config.yaml", "--designated-task", "$(DESIGNATED_TASK)" ]
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
           resources:
             {{- toYaml $.Values.resources | nindent 12 }}
       volumes:
