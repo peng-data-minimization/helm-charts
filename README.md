@@ -26,6 +26,7 @@ Note that when installing the complete pipeline the worker SPI config yaml has t
 
 Run `kubectl get pods` to make sure that pods have been started correctly.
 
+To deploy the pipeline without any spi worker, just remove any spi worker tasks in the values file (set `spi.tasks: []`).
 
 ## Configuration
 

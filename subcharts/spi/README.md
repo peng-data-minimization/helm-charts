@@ -12,7 +12,7 @@ A Helm chart for the data minimization streaming platform interface
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
+| image.pullPolicy | string | `"Always"` |  |
 | image.repository | string | `"tubpeng/kafka-data-minimization-spi"` |  |
 | image.tag | string | `"latest"` |  |
 | ingress.annotations | object | `{}` |  |
