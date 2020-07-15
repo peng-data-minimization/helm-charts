@@ -136,10 +136,10 @@ elasticsink:
   applicationId: com.datamountaineer.streamreactor.connect.elastic6.ElasticSinkConnector
 
   # topics to sink
-  topics: anon
+  topics: "anon,processed"
 
   # kcqb KCQL expression describing field selection and routes. type: STRING importance: HIGH
-  kcql: "INSERT INTO activities SELECT * FROM anon"
+  kcql: "INSERT INTO activities SELECT * FROM anon; INSERT INTO processed_activities SELECT * FROM processed;"
 
   # A dictionary allowing to specify SMT's, e.g.
   # transforms:
