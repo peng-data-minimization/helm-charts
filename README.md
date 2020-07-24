@@ -30,7 +30,7 @@ To deploy the pipeline without any spi worker, just remove any spi worker tasks 
 
 ## Configuration
 
-For more information on the configuration, refer to the [SPI chart](./charts/spi/README.md) documentation or the [kafka-spi repository](https://github.com/peng-data-minimization/kafka-spi).
+For more information on the configuration, refer to the [SPI chart](./subcharts/spi/README.md) documentation or the [kafka-spi repository](https://github.com/peng-data-minimization/kafka-spi).
 
 
 ## Development
