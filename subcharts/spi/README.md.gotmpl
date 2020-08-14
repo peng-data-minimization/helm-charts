@@ -2,4 +2,17 @@
 
 {{ template "chart.description" . }}
 
+## Mode of Operation
+
+<img src="img/spi-chart-architecture-on-k8s.png" alt="SPI Chart Architecture on Kubernetes" height="450" />
+
+## Configuration
+
+The SPI Chart is being configured with a data minimization worker tasks config file. For more configuration options see the [dm-spi](https://github.com/peng-data-minimization/dm-spi#configuration).
+
+<img src="img/spi-chart-configuration.png" alt="SPI Chart Configuration" height="350" /> </td>
+
+
 {{ template "chart.valuesSection" . }}
+
+Please note that there are more, optional configuration options. Please refer to the [values.yaml](values.yaml) for all configuration details.
