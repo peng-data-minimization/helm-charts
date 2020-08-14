@@ -6,6 +6,10 @@ Currently, we provide charts for the following tools:
 
 - [Streaming Provider Interface (SPI)](https://github.com/peng-data-minimization/kafka-spi)
 
+## Architecture
+
+<img src="dm-pipeline-chart-architecture.png" alt="DM Pipeline Chart Architecture on Kubernetes" height="450" />
+
 ## Deployment
 
 Add the helm repo:

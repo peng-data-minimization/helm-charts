@@ -2,8 +2,24 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+# Specify data minimization worker streaming platform configuration (see https://github.com/peng-data-minimization/dm-spi#https://github.com/peng-data-minimization/dm-spi#streaming_platform)
+streaming_platform:
+  type: kafka
+  # Specify the URL and port where the broker can be reached
+  broker_url: ""
 
+# Specify data minimization worker task defaults (see https://github.com/peng-data-minimization/dm-spi#task_defaults)
+task_defaults:
+  input_offset_reset: earliest
+  topic_encoding: "utf8"
+  storage_mode: "memory"
+  input_data_type: "json"
+
+# Specify data minimization worker tasks (see https://github.com/peng-data-minimization/dm-spi#task)
+# If left blank, no pods will be created as there are no tasks to fullfil
+tasks: []
+
+replicaCount: 1
 
 image:
   repository: tubpeng/kafka-data-minimization-spi
