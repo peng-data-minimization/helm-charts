@@ -1,5 +1,4 @@
-spi
-===
+# spi
 
 A Helm chart for the data minimization streaming platform interface
 
@@ -14,8 +13,7 @@ For more configuration options see the [dm-spi](https://github.com/peng-data-min
 
 <img src="img/spi-chart-configuration.png" alt="SPI Chart Configuration" height="350" /> </td>
 
-
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
